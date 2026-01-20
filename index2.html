@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A Alquimia das Estradas — A Ciência Química nos Materiais de Pavimentação</title>
+  <style>
+    :root{
+      --bg:#070A12;
+      --paper:#0B1220;
+      --ink:#EAF0FF;
+      --muted:#B6C2E2;
+      --gold:#E7C873;
+      --cyan:#6EE7FF;
+      --mag:#C084FC;
+      --lime:#A3FFB5;
+      --red:#FF6B6B;
+      --line:rgba(234,240,255,.14);
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 800px at 20% 15%, rgba(110,231,255,.18), transparent 55%),
+        radial-gradient(1000px 700px at 80% 30%, rgba(192,132,252,.16), transparent 60%),
+        radial-gradient(900px 650px at 50% 90%, rgba(231,200,115,.12), transparent 60%),
+        linear-gradient(180deg, #050812 0%, #070A12 55%, #060816 100%);
+      line-height:1.55;
+    }
+    a{color:var(--cyan); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Layout */
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 120px;
+    }
+    .paper{
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(110,231,255,.06), transparent 60%),
+        radial-gradient(800px 500px at 90% 20%, rgba(192,132,252,.06), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Cover */
+    .cover{
+      position:relative;
+      padding: 56px 44px 44px;
+      min-height: 86vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:
+        radial-gradient(1400px 900px at 30% 20%, rgba(231,200,115,.18), transparent 55%),
+        radial-gradient(1200px 800px at 80% 30%, rgba(110,231,255,.14), transparent 60%),
+        radial-gradient(900px 700px at 55% 90%, rgba(192,132,252,.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.15));
+    }
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      border:1px solid rgba(231,200,115,.35);
+      background: rgba(231,200,115,.07);
+      padding:10px 14px;
+      border-radius: 999px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-size:12px;
+      width: fit-content;
+    }
+    .title{
+      margin: 16px 0 6px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      font-size: clamp(36px, 5vw, 56px);
+      line-height: 1.05;
+      text-shadow: 0 20px 50px rgba(0,0,0,.55);
+    }
+    .subtitle{
+      margin: 10px 0 0;
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 75ch;
+    }
+    .cover-grid{
+      margin-top: 24px;
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    .cover-card{
+      border:1px solid var(--line);
+      background: rgba(11,18,32,.55);
+      border-radius: 18px;
+      padding: 18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .cover-card h3{
+      margin:0 0 10px;
+      font-size: 14px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(234,240,255,.82);
+    }
+    .cover-card p{margin:0; color: var(--muted); font-size: 14px}
+    .cover-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .chip{
+      border:1px solid rgba(110,231,255,.28);
+      background: rgba(110,231,255,.06);
+      color: rgba(234,240,255,.92);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing:.06em;
+      white-space:nowrap;
+    }
+    .author{
+      margin-top: 26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 18px;
+      color: rgba(234,240,255,.78);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+
+    /* Section */
+    .section{
+      padding: 44px;
+      border-top: 1px solid var(--line);
+      background: rgba(11,18,32,.35);
+    }
+    .kicker{
+      font-size: 12px;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(231,200,115,.92);
+      margin:0 0 8px;
+    }
+    h1,h2,h3{margin: 10px 0 12px}
+    h2{
+      font-size: 30px;
+      letter-spacing: -.02em;
+    }
+    h3{
+      font-size: 18px;
+      color: rgba(234,240,255,.92);
+    }
+    p{margin: 12px 0; color: rgba(234,240,255,.90)}
+    .muted{color: var(--muted)}
+
+    /* TOC */
+    .toc{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 18px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .toc a{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(234,240,255,.08);
+      background: rgba(0,0,0,.14);
+      color: rgba(234,240,255,.92);
+    }
+    .toc a:hover{
+      border-color: rgba(110,231,255,.35);
+      background: rgba(110,231,255,.07);
+      text-decoration:none;
+    }
+    .toc span{color: rgba(182,194,226,.95)}
+    .toc small{color: rgba(182,194,226,.7)}
+
+    /* Figure */
+    figure{
+      margin: 18px 0 22px;
+      border: 1px solid rgba(234,240,255,.12);
+      background: rgba(0,0,0,.18);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    figcaption{
+      padding: 12px 14px;
+      border-top: 1px solid rgba(234,240,255,.10);
+      color: rgba(182,194,226,.95);
+      font-size: 13px;
+    }
+    .figwrap{padding: 14px}
+    svg{width:100%; height:auto; display:block}
+
+    /* Callouts */
+    .callout{
+      border:1px solid rgba(231,200,115,.24);
+      background: rgba(231,200,115,.06);
+      border-radius: 16px;
+      padding: 14px 14px;
+      margin: 16px 0;
+    }
+    .callout b{color: var(--gold)}
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 860px){
+      .cover-grid{grid-template-columns:1fr}
+      .section{padding: 30px 20px}
+      .grid2{grid-template-columns:1fr}
+      .cover{padding: 40px 22px}
+    }
+
+    /* Print: “aprox. 30 páginas” com quebras por capítulo */
+    @media print{
+      body{background:#fff; color:#000}
+      .wrap{max-width: none; padding:0}
+      .paper{box-shadow:none; border:none; border-radius:0; background:#fff}
+      .cover{min-height:auto; background:#fff; color:#000; border-bottom:1px solid #ddd}
+      .cover-card,.toc,figure,.callout{break-inside:avoid}
+      .section{background:#fff; border-top:1px solid #ddd}
+      a{color:#000; text-decoration:none}
+      .pagebreak{break-after: page;}
+      .noprint{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="paper">
+
+      <!-- CAPA -->
+      <section class="cover pagebreak" id="capa">
+        <div>
+          <div class="badge">
+            <span>Livro Técnico</span>
+            <span style="opacity:.55">•</span>
+            <span>Química & Materiais</span>
+          </div>
+
+          <h1 class="title">A Alquimia das Estradas</h1>
+          <p class="subtitle">
+            A ciência química por trás do desempenho dos pavimentos — do nível molecular às falhas reais:
+            <span style="color:var(--gold)">oxidação</span>, <span style="color:var(--cyan)">energia superficial</span>,
+            <span style="color:var(--mag)">interfaces</span> e <span style="color:var(--lime)">reação expansiva</span>.
+          </p>
+
+          <div class="cover-grid">
+            <div class="cover-card">
+              <h3>O “segredo” do desempenho</h3>
+              <p>
+                Em pavimentação, o que parece mecânico quase sempre nasce do químico:
+                ligações, polaridade, envelhecimento, hidratação, migração de óleos e sais.
+                Este livro explica a estrada como um <b>sistema reativo</b> de camadas.
+              </p>
+              <div class="cover-meta">
+                <span class="chip">Frações SARA</span>
+                <span class="chip">Oxidação & envelhecimento</span>
+                <span class="chip">C-S-H & pH</span>
+                <span class="chip">ZTA (Concreto–Asfalto)</span>
+                <span class="chip">Energia superficial</span>
+                <span class="chip">RAA</span>
+                <span class="chip">SBS & borracha</span>
+                <span class="chip">Cloretos & sulfatos</span>
+              </div>
+            </div>
+
+            <div class="cover-card">
+              <h3>Mapa visual</h3>
+              <p class="muted">Um “selo” gráfico do tema: moléculas → microestrutura → desempenho.</p>
+              <div class="figwrap">
+                <!-- Capa SVG chamativa -->
+                <svg viewBox="0 0 520 380" role="img" aria-label="Ilustração de capa: estrada química multiescala">
+                  <defs>
+                    <linearGradient id="g1" x1="0" x2="1">
+                      <stop offset="0" stop-color="#6EE7FF" stop-opacity=".55"/>
+                      <stop offset="0.55" stop-color="#E7C873" stop-opacity=".50"/>
+                      <stop offset="1" stop-color="#C084FC" stop-opacity=".55"/>
+                    </linearGradient>
+                    <linearGradient id="gRoad" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0" stop-color="#0f172a" stop-opacity="1"/>
+                      <stop offset="1" stop-color="#020617" stop-opacity="1"/>
+                    </linearGradient>
+                    <filter id="glow">
+                      <feGaussianBlur stdDeviation="4" result="b"/>
+                      <feMerge>
+                        <feMergeNode in="b"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <!-- background -->
+                  <rect x="0" y="0" width="520" height="380" fill="rgba(0,0,0,.15)"/>
+                  <circle cx="110" cy="90" r="110" fill="url(#g1)" opacity=".28"/>
+                  <circle cx="420" cy="130" r="120" fill="url(#g1)" opacity=".22"/>
+                  <circle cx="270" cy="330" r="140" fill="url(#g1)" opacity=".15"/>
+
+                  <!-- molecular nodes -->
+                  <g filter="url(#glow)" opacity=".95">
+                    <circle cx="70" cy="70" r="10" fill="#6EE7FF"/>
+                    <circle cx="120" cy="55" r="7" fill="#E7C873"/>
+                    <circle cx="150" cy="90" r="8" fill="#C084FC"/>
+                    <circle cx="95" cy="115" r="6" fill="#A3FFB5"/>
+                    <line x1="70" y1="70" x2="120" y2="55" stroke="#EAF0FF" stroke-opacity=".35" />
+                    <line x1="120" y1="55" x2="150" y2="90" stroke="#EAF0FF" stroke-opacity=".35" />
+                    <line x1="150" y1="90" x2="95" y2="115" stroke="#EAF0FF" stroke-opacity=".35" />
+                    <line x1="95" y1="115" x2="70" y2="70" stroke="#EAF0FF" stroke-opacity=".35" />
+                  </g>
+
+                  <!-- road layers -->
+                  <g transform="translate(40,150)">
+                    <path d="M0,190 L440,190 L410,10 L30,10 Z" fill="url(#gRoad)" stroke="rgba(234,240,255,.18)"/>
+                    <path d="M45,170 L395,170 L375,30 L65,30 Z" fill="rgba(110,231,255,.06)" stroke="rgba(110,231,255,.20)"/>
+                    <path d="M55,140 L385,140 L370,55 L70,55 Z" fill="rgba(231,200,115,.06)" stroke="rgba(231,200,115,.18)"/>
+                    <path d="M65,110 L375,110 L364,80 L76,80 Z" fill="rgba(192,132,252,.06)" stroke="rgba(192,132,252,.18)"/>
+                    <text x="20" y="30" fill="rgba(234,240,255,.8)" font-size="12" letter-spacing=".12em">RELAÇÃO MULTIESCALA</text>
+                    <text x="20" y="52" fill="rgba(182,194,226,.85)" font-size="11">Molécula → Microestrutura → Desempenho</text>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="author">
+            <div>
+              <b>Autor:</b> Doutor em Engenharia de Materiais & Química Industrial (modo técnico-didático)
+              <div class="muted">Edição HTML com ilustrações SVG integradas</div>
+            </div>
+            <div class="muted noprint">Dica: Ctrl+P → “Salvar como PDF”</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SUMÁRIO -->
+      <section class="section pagebreak" id="sumario">
+        <p class="kicker">Sumário</p>
+        <h2>Estrutura do Livro (10 capítulos)</h2>
+        <p class="muted">Clique para navegar. Cada capítulo inclui uma ilustração técnica explicativa.</p>
+
+        <div class="toc">
+          <a href="#cap1"><span>Capítulo 1 — Fundamentos químicos multiescala</span><small>Molécula → microestrutura → desempenho</small></a>
+          <a href="#cap2"><span>Capítulo 2 — Química do asfalto: Frações SARA</span><small>Asfaltenos, resinas, aromáticos, saturados</small></a>
+          <a href="#cap3"><span>Capítulo 3 — Oxidação e envelhecimento do ligante</span><small>Carbonila, sulfóxido, rigidez e fragilidade</small></a>
+          <a href="#cap4"><span>Capítulo 4 — Concreto: hidratação, C-S-H e pH</span><small>C₃S/C₂S, portlandita, durabilidade</small></a>
+          <a href="#cap5"><span>Capítulo 5 — Reações deletérias: RAA e instabilidade</span><small>Gel expansivo, umidade, álcalis</small></a>
+          <a href="#cap6"><span>Capítulo 6 — Interface concreto–asfalto: ZTA</span><small>Energia superficial, migração de óleos, alcalinidade</small></a>
+          <a href="#cap7"><span>Capítulo 7 — Energia superficial e aderência</span><small>Ângulo de contato, termodinâmica da adesão</small></a>
+          <a href="#cap8"><span>Capítulo 8 — Aditivos: SBS, borracha e redes poliméricas</span><small>Pontes de H, viscoelasticidade</small></a>
+          <a href="#cap9"><span>Capítulo 9 — Sais no sistema: cloretos e sulfatos</span><small>Ascensão capilar, expansão, degradação</small></a>
+          <a href="#cap10"><span>Capítulo 10 — Futuro: autorregenerativos e química ativa</span><small>Microcápsulas, nanotecnologia</small></a>
+        </div>
+      </section>
+
+      <!-- CAP 1 -->
+      <section class="section pagebreak" id="cap1">
+        <p class="kicker">Capítulo 1</p>
+        <h2>A Matéria-Prima da Estrada: Fundamentos da Química dos Materiais de Pavimentação</h2>
+
+        <div class="callout">
+          <b>Tese do livro:</b> defeitos “mecânicos” (trinca, deformação, perda de aderência) são, em grande parte,
+          manifestações de <b>processos químicos</b> (oxidação, hidratação, polaridade, energia superficial e transporte de espécies).
+        </div>
+
+        <p>
+          Pavimentos são sistemas estratificados onde cada camada opera como um “reator” com cinética própria.
+          Do ponto de vista molecular, o desempenho depende de <b>interações intermoleculares</b>, <b>estado de oxidação</b>,
+          <b>polaridade</b>, <b>mobilidade</b> e <b>equilíbrios de fase</b> (orgânico/inorgânico, hidrofóbico/hidrofílico).
+        </p>
+
+        <p>
+          O ligante asfáltico, por exemplo, não é um líquido simples: sua estabilidade coloidal (e portanto sua reologia)
+          emerge do balanço entre frações de diferentes polaridades e massas molares. Já o concreto endurecido é um compósito
+          alcalino cujo microambiente (pH, disponibilidade iônica, umidade) dita a durabilidade e a suscetibilidade a reações deletérias.
+        </p>
+
+        <figure>
+          <div class="figwrap">
+            <!-- Multiscale illustration -->
+            <svg viewBox="0 0 980 360" role="img" aria-label="Diagrama multiescala: molécula, microestrutura e desempenho">
+              <defs>
+                <linearGradient id="mScale" x1="0" x2="1">
+                  <stop offset="0" stop-color="#6EE7FF" stop-opacity=".28"/>
+                  <stop offset="0.5" stop-color="#E7C873" stop-opacity=".25"/>
+                  <stop offset="1" stop-color="#C084FC" stop-opacity=".28"/>
+                </linearGradient>
+              </defs>
+
+              <rect x="0" y="0" width="980" height="360" fill="rgba(255,255,255,.02)"/>
+              <rect x="18" y="18" width="944" height="324" rx="18" fill="url(#mScale)" opacity=".55" />
+
+              <!-- 3 panels -->
+              <g>
+                <rect x="60" y="70" width="260" height="220" rx="16" fill="rgba(0,0,0,.22)" stroke="rgba(234,240,255,.18)"/>
+                <rect x="360" y="70" width="260" height="220" rx="16" fill="rgba(0,0,0,.22)" stroke="rgba(234,240,255,.18)"/>
+                <rect x="660" y="70" width="260" height="220" rx="16" fill="rgba(0,0,0,.22)" stroke="rgba(234,240,255,.18)"/>
+
+                <text x="80" y="100" font-size="14" fill="rgba(234,240,255,.92)" letter-spacing=".16em">MOLÉCULA</text>
+                <text x="380" y="100" font-size="14" fill="rgba(234,240,255,.92)" letter-spacing=".16em">MICROESTRUTURA</text>
+                <text x="680" y="100" font-size="14" fill="rgba(234,240,255,.92)" letter-spacing=".16em">DESEMPENHO</text>
+
+                <!-- molecule doodle -->
+                <circle cx="125" cy="170" r="12" fill="#6EE7FF"/>
+                <circle cx="200" cy="150" r="10" fill="#E7C873"/>
+                <circle cx="235" cy="210" r="11" fill="#C084FC"/>
+                <circle cx="150" cy="230" r="9" fill="#A3FFB5"/>
+                <line x1="125" y1="170" x2="200" y2="150" stroke="rgba(234,240,255,.35)" stroke-width="2"/>
+                <line x1="200" y1="150" x2="235" y2="210" stroke="rgba(234,240,255,.35)" stroke-width="2"/>
+                <line x1="235" y1="210" x2="150" y2="230" stroke="rgba(234,240,255,.35)" stroke-width="2"/>
+                <line x1="150" y1="230" x2="125" y2="170" stroke="rgba(234,240,255,.35)" stroke-width="2"/>
+                <text x="80" y="270" font-size="12" fill="rgba(182,194,226,.92)">Polaridade • ligações • grupos funcionais</text>
+
+                <!-- microstructure: pores + phases -->
+                <rect x="400" y="132" width="180" height="120" rx="14" fill="rgba(110,231,255,.06)" stroke="rgba(110,231,255,.25)"/>
+                <circle cx="440" cy="170" r="14" fill="rgba(231,200,115,.25)"/>
+                <circle cx="492" cy="206" r="10" fill="rgba(231,200,115,.22)"/>
+                <circle cx="535" cy="175" r="8" fill="rgba(231,200,115,.20)"/>
+                <path d="M420,232 C455,200 470,242 505,215 C535,195 540,230 565,206" fill="none" stroke="rgba(192,132,252,.55)" stroke-width="3"/>
+                <text x="380" y="270" font-size="12" fill="rgba(182,194,226,.92)">Fases • poros • interfaces • transporte iônico</text>
+
+                <!-- performance: curve + symbols -->
+                <path d="M700,250 C735,190 760,210 790,160 C820,110 860,140 900,100" fill="none" stroke="rgba(163,255,181,.75)" stroke-width="4"/>
+                <line x1="700" y1="250" x2="920" y2="250" stroke="rgba(234,240,255,.20)"/>
+                <line x1="700" y1="250" x2="700" y2="120" stroke="rgba(234,240,255,.20)"/>
+                <text x="705" y="116" font-size="12" fill="rgba(182,194,226,.92)">Resistência / Rigidez</text>
+                <text x="820" y="272" font-size="12" fill="rgba(182,194,226,.92)">Tempo / Envelhecimento</text>
+                <text x="680" y="270" font-size="12" fill="rgba(182,194,226,.92)">Aderência • fadiga • deformação</text>
+
+                <!-- arrows -->
+                <path d="M320,180 L352,180" stroke="rgba(231,200,115,.75)" stroke-width="3" marker-end="url(#arrow)"/>
+              </g>
+
+              <defs>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 Z" fill="rgba(231,200,115,.85)"/>
+                </marker>
+              </defs>
+
+              <path d="M320,180 L360,180" stroke="rgba(231,200,115,.75)" stroke-width="3" marker-end="url(#arrow)"/>
+              <path d="M620,180 L660,180" stroke="rgba(231,200,115,.75)" stroke-width="3" marker-end="url(#arrow)"/>
+            </svg>
+          </div>
+          <figcaption>
+            Ilustração 1 — Relação multiescala: propriedades moleculares e interfaciais governam microestrutura (fases/poros/transporte) e,
+            por consequência, o desempenho (rigidez, adesão, fadiga, envelhecimento).
+          </figcaption>
+        </figure>
+
+        <h3>1.1 Termodinâmica e o “custo” de criar interface</h3>
+        <p>
+          Em pavimentação, criar aderência é “pagar” energia para aproximar superfícies e expulsar fases indesejadas (principalmente água).
+          A adesão só é estável quando a energia livre do sistema diminui ao formar a interface — daí a importância de <b>energia superficial</b>,
+          <b>polaridade</b> e <b>tensão interfacial</b>.
+        </p>
+
+        <h3>1.2 Por que química do asfalto e do concreto se encontram em conflito</h3>
+        <p>
+          O concreto tende a ser <b>hidrofílico</b> (superfícies polares, afinidade por água), enquanto o ligante asfáltico é majorita
