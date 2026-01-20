@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quanto Vale Meu Imóvel | Avaliação Imobiliária</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    header {
+      background: #0d3b66;
+      color: #fff;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 34px;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      color: #0d3b66;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #0d3b66;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #092c4c;
+    }
+
+    .resultado {
+      background: #eef3f8;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 25px;
+    }
+
+    .whatsapp {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 15px 20px;
+      background: #25d366;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    footer {
+      background: #0d3b66;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Quanto Vale Meu Imóvel</h1>
+  <p>Avaliação Imobiliária Técnica com Projeção de Valorização</p>
+  <p><strong>Avaliador de Imóveis | Engenheiro Civil</strong></p>
+</header>
+
+<section>
+  <div class="box">
+    <h2>Simulador de Valor Futuro do Imóvel</h2>
+
+    <label>Valor atual do imóvel (R$)</label>
+    <input type="number" id="valor" placeholder="Ex: 500000">
+
+    <label>Cidade</label>
+    <input type="text" placeholder="Ex: São Paulo">
+
+    <label>Tipo de imóvel</label>
+    <select>
+      <option>Casa</option>
+      <option>Apartamento</option>
+      <option>Terreno</option>
+      <option>Comercial</option>
+    </select>
+
+    <label>Quantos anos no futuro?</label>
+    <input type="number" id="anos" placeholder="Ex: 10">
+
+    <button onclick="calcular()">Calcular Valorização</button>
+
+    <div class="resultado" id="resultado"></div>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Como Funciona a Avaliação</h2>
+    <p>
+      A projeção apresentada considera percentuais médios de valorização do mercado
+      imobiliário ao longo do tempo, aplicados de forma composta.
+    </p>
+    <ul>
+      <li><strong>Conservador:</strong> 4% ao ano</li>
+      <li><strong>Moderado:</strong> 7% ao ano</li>
+      <li><strong>Otimista:</strong> 10% ao ano</li>
+    </ul>
+    <p>
+      ⚠ Esta simulação é uma <strong>estimativa técnica</strong> e não substitui
+      laudo oficial conforme normas da ABNT.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Serviços</h2>
+    <ul>
+      <li>Avaliação de Imóveis</li>
+      <li>Análise de Valorização Imobiliária</li>
+      <li>Projeção de Valor Futuro</li>
+      <li>Apoio técnico para decisões patrimoniais</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="box">
+    <h2>Contato</h2>
+    <p>Fale diretamente com um avaliador de imóveis engenheiro civil.</p>
+    <a class="whatsapp" href="https://wa.me/5511945715195" target="_blank">
+      📱 WhatsApp: (11) 94571-5195
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>Plataforma Digital de Análise e Projeção de Valor Imobiliário</p>
+</footer>
+
+<script>
+function calcular() {
+  let valor = parseFloat(document.getElementById("valor").value);
+  let anos = parseInt(document.getElementById("anos").value);
+
+  if (isNaN(valor) || isNaN(anos)) {
+    alert("Preencha corretamente os campos.");
+    return;
+  }
+
+  let conservador = valor * Math.pow(1.04, anos);
+  let moderado = valor * Math.pow(1.07, anos);
+  let otimista = valor * Math.pow(1.10, anos);
+
+  document.getElementById("resultado").innerHTML = `
+    <h3>Resultado da Projeção</h3>
+    <p><strong>Conservador (4% a.a.):</strong> R$ ${conservador.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+    <p><strong>Moderado (7% a.a.):</strong> R$ ${moderado.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+    <p><strong>Otimista (10% a.a.):</strong> R$ ${otimista.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+  `;
+}
+</script>
+
+</body>
+</html>
